@@ -6,30 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('mobils', function (Blueprint $table) {
-           $table-> id();
-           $table->string('nama');
-           $table->string('brand');
-           $table->unsignedBigInteger('harga');
-           $table->integer('tahun');
-           $table->string('transmisi');
-           $table->string('bahan_bakar');
-           $table->string('status')->default('tersedia');
-           $table->text('foto');
-           $table->timestamps();
+        if (Schema::hasTable('personal_access_tokens')) {
+            return;
+        }
+
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('tokenable');
+            $table->text('name');
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable()->index();
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('mobils');
+        Schema::dropIfExists('personal_access_tokens');
     }
 };
