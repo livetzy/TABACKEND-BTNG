@@ -39,7 +39,7 @@ class MobilController extends Controller
             $search = $request->query('search');
             $query->where(function ($q) use ($search) {
                 $q->where('nama', 'like', "%{$search}%")
-                  ->orWhere('brand', 'like', "%{$search}%");
+                    ->orWhere('brand', 'like', "%{$search}%");
             });
         }
 
@@ -106,7 +106,7 @@ class MobilController extends Controller
             'nama' => 'required|string|max:255',
             'brand' => 'required|string|max:100',
             'harga' => 'required|numeric|min:0',
-            'tahun' => "required|integer|min:1900|max:" . ($currentYear + 1),
+            'tahun' => 'required|integer|min:1900|max:'.($currentYear + 1),
             'transmisi' => 'required|string|max:50',
             'bahan_bakar' => 'required|string|max:50',
             'status' => 'required|string|in:tersedia,sold,Tersedia,Sold',
@@ -162,7 +162,7 @@ class MobilController extends Controller
     {
         $mobil = Mobil::find($id);
 
-        if (!$mobil) {
+        if (! $mobil) {
             return response()->json([
                 'message' => 'Data mobil tidak ditemukan',
             ], 404);
@@ -201,7 +201,7 @@ class MobilController extends Controller
     {
         $mobil = Mobil::find($id);
 
-        if (!$mobil) {
+        if (! $mobil) {
             return response()->json([
                 'message' => 'Data mobil tidak ditemukan',
             ], 404);
@@ -213,7 +213,7 @@ class MobilController extends Controller
             'nama' => 'sometimes|required|string|max:255',
             'brand' => 'sometimes|required|string|max:100',
             'harga' => 'sometimes|required|numeric|min:0',
-            'tahun' => "sometimes|required|integer|min:1900|max:" . ($currentYear + 1),
+            'tahun' => 'sometimes|required|integer|min:1900|max:'.($currentYear + 1),
             'transmisi' => 'sometimes|required|string|max:50',
             'bahan_bakar' => 'sometimes|required|string|max:50',
             'status' => 'sometimes|required|string|in:tersedia,sold,Tersedia,Sold',
@@ -259,7 +259,7 @@ class MobilController extends Controller
     {
         $mobil = Mobil::find($id);
 
-        if (!$mobil) {
+        if (! $mobil) {
             return response()->json([
                 'message' => 'Data mobil tidak ditemukan',
             ], 404);
@@ -271,4 +271,4 @@ class MobilController extends Controller
             'message' => 'Data mobil berhasil dihapus',
         ], 200);
     }
-} 
+}

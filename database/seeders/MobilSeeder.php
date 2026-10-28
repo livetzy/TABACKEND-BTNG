@@ -23,7 +23,7 @@ class MobilSeeder extends Seeder
                 'status' => 'tersedia',
                 'foto' => 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80',
             ],
-            [   
+            [
                 'nama' => 'Civic RS Turbo',
                 'brand' => 'Honda',
                 'harga' => 615000000,
